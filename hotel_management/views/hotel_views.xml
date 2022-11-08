@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+<!--        sequence number generation-->
+        <record id="seq_hotel_management" model="ir.sequence">
+            <field name="name">Hotel Sequence</field>
+            <field name="code">hotel.management</field>
+            <field name="prefix">HM</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <!--Hotel Management Form View-->
+        <record id="hotel_management_view_form" model="ir.ui.view">
+            <field name="name">management.view.form</field>
+            <field name="model">hotel.hotel</field>
+            <field name="arch" type="xml">
+                <form string="Hotel">
+                    <sheet>
+                        <group string="Hotel Management">
+                            <group>
+                                <field name="serial_no" force_save="1"/>
+                                <field name="name"/>
+                                <field name='include_phone_no'/>
+                                <field name="phone_no" attrs="{'invisible': [('include_phone_no','=',False)] }"/>
+                                <field name='time_to_leave'/>
+                                <button name="action_confirm" string="Confirm" type="object"/>
+                            </group>
+                            <group>
+                                <field name="rating"/>
+                                <field name="started_date"/>
+                                <field name="years"/>
+                                <field name="tag_ids" widget="many2many_tags"/>
+                                <button name="action_browse" string="Browse" type="object"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Hotel details">
+                                <!--                            -->
+
+                            </page>
+                            <page string="Owner details">
+                                <!--                                <field name="Enter Owner Details"/>-->
+
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+<!--        hotel management tree view-->
+        <record id="hotel_management_view_tree" model="ir.ui.view">
+            <field name="name">hotel.view.tree</field>
+            <field name="model">hotel.hotel</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="serial_no" string="Serial No"/>
+                    <field name="name" string="Name" required="1"/>
+                    <field name="phone_no" string="Phone Number"/>
+                    <!--                    <field name="partner_id" string="Owner Name"/>-->
+                    <field name="rating" string="Rating"/>
+                </tree>
+            </field>
+        </record>
+<!--        searching datas-->
+        <record id="hotel_hotel_search" model="ir.ui.view">
+            <field name="name">hotel.hotel.search</field>
+            <field name="model">hotel.hotel</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" string="Hotel Name"/>
+                    <field name="serial_no"/>
+                    <field name="phone_no"/>
+                    <field name="rating"/>
+                    <!--                    <field name="partner_id"/>-->
+                </search>
+            </field>
+        </record>
+<!--        filtering data-->
+        <record id="hotel_hotel_search" model="ir.ui.view">
+            <field name="name">hotel.hotel.search</field>
+            <field name="model">hotel.hotel</field>
+            <field name="arch" type="xml">
+                <search>
+
+                    <field name="name" string='Hotel Name'
+                           filter_domain="['|','|','|',('name','ilike',self), ('rating','ilike',self), ('phone_no','ilike',self), ('serial_no','ilike',self)]"/>
+                    <field name="rating"/>
+                    <field name="phone_no"/>
+                    <field name="serial_no"/>
+                    <filter name="filter_1star" string="*" domain="[('rating', '=', '1star')]"/>
+                    <filter name="filter_2star" string="**" domain="[('rating', '=', '2star')]"/>
+                    <filter name="filter_3star" string="***" domain="[('rating', '=', '3star')]"/>
+                    <filter name="filter_4star" string="****" domain="[('rating', '=', '4star')]"/>
+                    <filter name="filter_5star" string="*****" domain="[('rating', '=', '5star')]"/>
+                    <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_hotel_management" model="ir.actions.act_window">
+            <field name="name">Hotel Management</field>
+            <field name="res_model">hotel.hotel</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create Hotel Record
+                </p>
+            </field>
+        </record>
+
+        <!--Parent Menu Hotel Management-->
+        <menuitem id="hotel_management_menu_root"
+                  name="Hotel Management"
+                  sequence="7"/>
+        <!--Menu Hotel Management-->
+        <menuitem id="hotel_management_menu"
+                  name="Hotel Details"
+                  parent="hotel_management.hotel_management_menu_root"
+                  action="action_hotel_management"
+                  sequence="0"/>
+        <menuitem id="hotel_management"
+                  name="Hotel"
+                  parent="hotel_management.hotel_management_menu"
+                  sequence="0"/>
+    </data>
+</odoo>

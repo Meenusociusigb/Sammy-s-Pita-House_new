@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_report_booking_form" model="ir.ui.view">
+        <field name="name">booking.report.wizard</field>
+        <field name="model">booking.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Print Booking">
+                <group>
+
+                    <field name="customer_id"/>
+                </group>
+                <group>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                </group>
+                <footer>
+                    <button name="action_print_report" string="Print" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_report_booking" model="ir.actions.act_window">
+        <field name="name">Booking</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">booking.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_report_booking_form"/>
+        <field name="target">new</field>
+
+
+    </record>
+
+    <menuitem id="menu_reporting"
+              name="Reporting"
+              parent="hotel_management.hotel_management_menu_root"
+              sequence="30"/>
+    <menuitem id="menu_booking_report"
+              name="Booking"
+              parent="hotel_management.menu_reporting"
+              action="action_report_booking"
+              sequence="10"/>
+
+</odoo>

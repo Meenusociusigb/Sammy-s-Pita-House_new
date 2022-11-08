@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_hotel">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+
+                    <div class="page">
+
+                        <h1>Booking Details</h1>
+                        Receipt No:
+                        <t t-esc="doc.serial_no"/>
+                        <br></br>
+                        Hotel Name:
+                        <t t-esc="doc.name"/>
+                        <br></br>
+                        Phone No:
+                        <t t-esc="doc.phone_no"/>
+                        <br></br>
+                        Rating:
+                        <t t-esc="doc.rating"/>
+                        <br></br>
+                        Started Date:
+                        <t t-esc="doc.started_date"/>
+                        <br></br>
+                        Years:
+                        <t t-esc="doc.years"/>
+                        <br></br>
+
+                        <span t-field="doc.tag_ids"/>
+                    </div>
+
+                </t>
+            </t>
+        </t>
+    </template>
+    <template id="report_booking_details">
+        <t t-call="web.html_container">
+
+            <t t-call="web.external_layout">
+
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <div class="text_center"/>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <h1>
+                        <center>Booking Details</center>
+                    </h1>
+                </div>
+                <table>
+                    <tr>
+                        <td>Hotel</td>
+                        <td>:</td>
+                        <td>
+
+                            <t t-esc="form['customer_id'][1]"/>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Date From</td>
+                        <td>:</td>
+                        <td>
+
+                            <t t-esc="form['date_from']"/>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Date To</td>
+                        <td>:</td>
+                        <td>
+
+                            <t t-esc="form['date_to']"/>
+
+                        </td>
+                    </tr>
+                </table>
+                <br></br>
+                <table class="table table-bordered mt32">
+                    <thead>
+                        <tr>
+                            <th name="serial_no" class="text-left">
+                                <span>Serial No</span>
+                            </th>
+                            <th name="name" class="text-left">
+                                <span>Name</span>
+                            </th>
+                             <th name="phone_no" class="text-left">
+                                <span>Phone No</span>
+                            </th>
+                             <th name="rating" class="text-left">
+                                <span>Rating</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <t t-foreach="bookings" t-as="line">
+                        <tr>
+                            <td>
+                                <span t-esc="line['serial_no']"/>
+                            </td>
+                            <td>
+                                <span t-esc="line['name']"/>
+                            </td>
+                            <td>
+                                <span t-esc="line['phone_no']"/>
+                            </td>
+                            <td>
+                                <span t-esc="line['rating']"/>
+                            </td>
+                        </tr>
+                    </t>
+                </table>
+            </t>
+        </t>
+
+    </template>
+</odoo>
