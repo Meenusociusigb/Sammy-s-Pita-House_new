@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hotel_hotel_user,hotel.hotel,model_hotel_hotel,base.group_user,1,1,1,1
+access_hotel_booking_user,hotel.booking,model_hotel_booking,base.group_user,1,1,1,1
+access_hotel_section_lines_user,hotel.section.lines,model_hotel_section_lines,base.group_user,1,1,1,1
+access_create_booking_wizard_user,create.booking.wizard,model_create_booking_wizard,base.group_user,1,1,1,1
+access_booking_report_wizard_user,booking.report.wizard,model_booking_report_wizard,base.group_user,1,1,1,1

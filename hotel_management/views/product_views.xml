@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<!--    inheit product template-->
+    <record id="product_views_inherit" model="ir.ui.view">
+        <field name="name">product.template.form.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <field name = 'barcode' position="after">
+                <field name="product_note" string="Product Note"/>
+                <field name="is_checked" groups="hotel_management.group_hotel_manager"/>
+
+            </field>
+        </field>
+    </record>
+</odoo>
